@@ -15,7 +15,7 @@ DSH 子 agent provider 插件：把任务委派给 OpenAI Codex CLI（`codex exe
 # 从 npm 或本地 tgz 安装（dsh.bundle 声明会自动把插件加进 bundle 栈）
 dsh plugin --profile web add dsh-subagent-codex
 # 或本地安装
-dsh plugin --profile web add file:/path/to/dsh-subagent-codex-0.1.0.tgz
+dsh plugin --profile web add file:/path/to/dsh-subagent-codex-0.1.1.tgz
 ```
 
 安装后重启 DSH，新会话即可使用 `subagent_codex` 工具。
@@ -46,13 +46,13 @@ provider 行支持的 config：
 ## 工作原理
 
 - provider 遵循 `@deepseek-ai/dsh-subagent/out-of-process` 契约：不声明任何 start 能力（外部 CLI 无法强制执行 outputSchema / maxDepth / toolFilter / persona），结果永远不会 reject（正常/中止/失败都解析为终态结果）。
-- 每次委派 spawn 一次 `codex exec --json --skip-git-repo-check --ephemeral <prompt>`，解析 JSONL 事件流，取最后一条 `agent_message` 文本作为最终输出。
+- 每次委派 spawn 一次 `codex exec --json --skip-git-repo-check <prompt>`，解析 JSONL 事件流，取最后一条 `agent_message` 文本作为最终输出。每次运行都会把会话（rollout JSONL）保存到 `~/.codex/sessions/<YYYY>/<MM>/<DD>/`（不带 `--ephemeral`），可追溯：可用 `codex resume` 找回，需要归档到 `~/.codex/archived_sessions/` 时执行 `codex archive <session-id>`。
 - 依赖 `~/.codex/auth.json` 中已有的 Codex 登录态。
 
 ## 开发
 
 ```bash
-npm pack    # 生成 dsh-subagent-codex-0.1.0.tgz
+npm pack    # 生成 dsh-subagent-codex-0.1.1.tgz
 ```
 
 ## License
