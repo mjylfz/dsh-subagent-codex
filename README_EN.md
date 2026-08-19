@@ -14,11 +14,11 @@ A DSH plugin that adds a `subagent_codex` tool to your Harness sessions. You —
 
 ## When to use it
 
-A few real-world examples:
+A few real-world examples (the kind of heavier work Codex excels at):
 
-- **Research**: *"Use codex to check today's weather in Shanghai"* — Codex goes online, digests, and reports back.
-- **Coding**: *"Have codex refactor this function and add unit tests"* — Codex edits code in your current workspace, runs tests, and reports the outcome.
-- **A second opinion**: *"Spawn a codex subagent to review this code for bugs and security issues"* — an "outside expert" reviews with a completely different perspective instead of agreeing with itself.
+- **Tech-stack research**: *"Have codex research: for our analytics layer, should we go with ClickHouse or stick with Postgres? Compare query performance, ops cost, and fit with our existing stack, then give a recommendation with rationale"* — Codex digs through sources online, compares across dimensions, and comes back with a conclusion you can take straight into a team discussion.
+- **Cross-module refactoring**: *"Have codex migrate user auth from JWT to OAuth2: update the auth middleware, add database migration scripts, write unit and integration tests, run everything green, then summarize the changes as a commit message"* — Codex edits code in your current workspace, runs the tests, and delivers the whole change set; you just review it.
+- **Independent security review**: *"Spawn a codex subagent to do a security review of the latest commit: focus on SQL injection, auth bypass, and sensitive-data leaks, suggest fixes, and output a report ranked by severity"* — an "outside expert" with a completely different perspective, whose whole job is to poke holes — no self-approval bias.
 
 **When NOT to use it**: tasks that must stay inside DSH (calling DSH memory, session history, or other DSH tools). Leave those to a regular `subagent`.
 
