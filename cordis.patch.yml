@@ -1,0 +1,23 @@
+# dsh-subagent-codex bundle patch
+#
+# Registers the codex subagent provider on the host plane and exposes the
+# `subagent_codex` delegation tool to every agent. The tool row uses a
+# distinct id (`tool-subagent-codex-enabled`) so it never collides with the
+# disabled `tool-subagent-codex` row shipped inside the `standard` preset.
+#
+# Load order is not sensitive: `dsh-tool-subagent` listens for the
+# `subagent/provider-added` event and mounts the tool as soon as the codex
+# provider registers.
+- insert:
+    - id: subagent-codex
+      name: 'dsh-subagent-codex'
+      config:
+        command: codex
+
+    - id: tool-subagent-codex-enabled
+      name: '@deepseek-ai/dsh-tool-subagent'
+      config:
+        provider: codex
+        toolName: subagent_codex
+        backgroundMode: one-shot
+        maxDepth: provider-managed
