@@ -43,7 +43,7 @@ dsh plugin --profile web add file:/path/to/dsh-subagent-codex-0.1.1.tgz
 Restart DSH and open a new session, then just say:
 
 ```
-Use codex to check today's weather
+Have codex research the latest papers on LLM inference acceleration and summarize them into a comparative review
 Have the codex subagent do X
 ```
 

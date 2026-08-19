@@ -43,7 +43,7 @@ dsh plugin --profile web add file:/path/to/dsh-subagent-codex-0.1.1.tgz
 重启 DSH 后新开一个会话，直接说：
 
 ```
-用 codex 查一下今天的天气
+让 codex 调研一下大语言模型推理加速的最新论文进展，整理成一篇带对比的综述
 让 codex 子 agent 做 XX
 ```
 
