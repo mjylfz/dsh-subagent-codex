@@ -101,6 +101,9 @@ A: By design. The DSH sidebar subagent tree only lists DSH-internal subagents (t
 **Q: Do I need the Codex desktop app?**
 A: No. The plugin calls the `codex` CLI directly. The desktop app is irrelevant.
 
+**Q: I get an error that the `codex` command cannot be found (spawn … ENOENT).**
+A: The plugin looks for the `codex` binary on your PATH. Confirm the Codex CLI is installed with `codex --version`. If it is installed but not on PATH (e.g. a non-standard location), point `command` at its absolute path in the config: `command: /path/to/codex`.
+
 **Q: Does this consume my OpenAI quota?**
 A: Yes. Every invocation runs Codex with the account your `~/.codex` is logged in as, consuming Codex token quota.
 

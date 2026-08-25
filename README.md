@@ -100,6 +100,9 @@ A: 设计如此。DSH 的侧边栏子 agent 树只显示 DSH 内部子 agent（�
 **Q: 需要装 Codex 的桌面 app 吗？**
 A: 不需要。插件直接调用 `codex` CLI。桌面 app 装不装都不影响。
 
+**Q: 报错说找不到 `codex` 命令（spawn … ENOENT）怎么办？**
+A: 插件在你本机的 PATH 里找 `codex` 可执行文件。如果找不到，先确认 Codex CLI 已安装：`codex --version`。如果已安装但不在 PATH（比如装在非默认位置），在配置里把 `command` 指向它的绝对路径：`command: /path/to/codex`。
+
 **Q: 会消耗我的 OpenAI 额度吗？**
 A: 会。每次调用都用你 `~/.codex` 登录的账号跑 Codex，消耗的是 Codex 的 token 额度。
 
