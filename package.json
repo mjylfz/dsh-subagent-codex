@@ -26,6 +26,14 @@
     "node": ">=20"
   },
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mjylfz/dsh-subagent-codex.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mjylfz/dsh-subagent-codex/issues"
+  },
+  "homepage": "https://github.com/mjylfz/dsh-subagent-codex#readme",
   "keywords": [
     "dsh",
     "dsh-plugin",
