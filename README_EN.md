@@ -36,7 +36,7 @@ A few real-world examples (the kind of heavier work Codex excels at):
 # via the dsh plugin command (the dsh.bundle declaration auto-mounts the plugin)
 dsh plugin --profile web add dsh-subagent-codex
 # or from a local tarball
-dsh plugin --profile web add file:/path/to/dsh-subagent-codex-0.1.1.tgz
+dsh plugin --profile web add file:/path/to/dsh-subagent-codex-0.1.2.tgz
 ```
 
 ### 3. Restart and talk

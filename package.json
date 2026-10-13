@@ -1,6 +1,6 @@
 {
   "name": "dsh-subagent-codex",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "DSH subagent provider that delegates tasks to the OpenAI Codex CLI (codex exec), exposing the subagent_codex tool",
   "type": "module",
   "main": "lib/index.js",
@@ -43,7 +43,7 @@
   ],
   "peerDependencies": {
     "@deepseek-ai/cordis": "^4.0.1",
-    "@deepseek-ai/dsh-subagent": "^0.1.0-rc.7",
+    "@deepseek-ai/dsh-subagent": "^0.1.0-rc.7 || >=0.2.0-rc.1 <0.3.0-0",
     "@deepseek-ai/schemastery": "^3.18.0"
   }
 }

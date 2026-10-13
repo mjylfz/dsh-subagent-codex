@@ -36,7 +36,7 @@
 # 通过 dsh 插件命令安装（dsh.bundle 声明会自动把插件加进 bundle 栈）
 dsh plugin --profile web add dsh-subagent-codex
 # 或本地 tgz 安装
-dsh plugin --profile web add file:/path/to/dsh-subagent-codex-0.1.1.tgz
+dsh plugin --profile web add file:/path/to/dsh-subagent-codex-0.1.2.tgz
 ```
 
 ### 3. 重启，开聊
