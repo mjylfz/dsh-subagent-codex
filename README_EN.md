@@ -30,16 +30,30 @@ A few real-world examples (the kind of heavier work Codex excels at):
 - [Codex CLI](https://github.com/openai/codex) installed and logged in (`~/.codex/auth.json` exists).
 - DeepSeek Harness installed.
 
-### 2. Install
+### 2. Versions and compatibility
+
+| Plugin version | Supported DSH runtime | Notes |
+|---|---|---|
+| `0.1.2` | `0.1.x` **and** `0.2.x` | Dual-generation support. Works on DSH Desktop 2.0.17 (runtime `0.2.0-rc.2`) |
+| `0.1.1` | `0.1.x` only | Rejected by the compatibility gate on `0.2.0-rc.2` |
+
+> **If you upgraded DSH Desktop, install `0.1.2` or newer.** DSH 2.0.16 moved the runtime
+> to `0.2.0`; older versions declare peers the new runtime no longer satisfies, and the
+> plugin is silently skipped.
+
+### 3. Install
 
 ```bash
-# via the dsh plugin command (the dsh.bundle declaration auto-mounts the plugin)
-dsh plugin --profile web add dsh-subagent-codex
-# or from a local tarball
-dsh plugin --profile web add file:/path/to/dsh-subagent-codex-0.1.2.tgz
+# recommended: install by tag (reproducible)
+dsh plugin --profile desktop add github:mjylfz/dsh-subagent-codex#v0.1.2
+
+# or download the tarball from the GitHub Release and install locally
+dsh plugin --profile desktop add file:/path/to/dsh-subagent-codex-0.1.2.tgz
 ```
 
-### 3. Restart and talk
+Fully quit and restart DSH Desktop after installing.
+
+### 4. Restart and talk
 
 Restart DSH and open a new session, then just say:
 
@@ -106,6 +120,12 @@ A: The plugin looks for the `codex` binary on your PATH. Confirm the Codex CLI i
 
 **Q: Does this consume my OpenAI quota?**
 A: Yes. Every invocation runs Codex with the account your `~/.codex` is logged in as, consuming Codex token quota.
+
+**Q: After upgrading DSH the plugin no longer loads / the log says "is incompatible with dsh".**
+A: That is DSH's compatibility gate at work — it detects that the plugin's peer declarations no longer satisfy the current runtime and refuses to load it (instead of crashing). DSH Desktop 2.0.16 moved the runtime to `0.2.0`, so upgrade the plugin to `0.1.2` or newer; `0.1.1` and earlier only support `0.1.x`.
+
+**Q: After a subagent times out or is cancelled, the whole session hangs?**
+A: A known defect in `0.1.1` and earlier. A signal-terminated child keeps `exitCode === null`, so the teardown wait on the cancellation path never returns. Fixed in `0.1.2` (the exit promise is now created eagerly at spawn time).
 
 ## License
 

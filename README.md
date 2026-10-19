@@ -30,16 +30,29 @@
 - 已安装 [Codex CLI](https://github.com/openai/codex) 并登录（`~/.codex/auth.json` 存在）。
 - 已安装 DeepSeek Harness。
 
-### 2. 安装
+### 2. 版本与兼容性
+
+| 插件版本 | 支持的 DSH 运行时 | 说明 |
+|---|---|---|
+| `0.1.2` | `0.1.x` **和** `0.2.x` | 双代兼容。DSH Desktop 2.0.17（内核 `0.2.0-rc.2`）起可用 |
+| `0.1.1` | 仅 `0.1.x` | 在 `0.2.0-rc.2` 上会被兼容闸门拒绝加载 |
+
+> **升级了 DSH Desktop 的人请装 `0.1.2` 及以上。** DSH 2.0.16 起内核跳到 `0.2.0`，
+> 旧版的 peer 声明不满足新运行时，插件会被静默跳过。
+
+### 3. 安装
 
 ```bash
-# 通过 dsh 插件命令安装（dsh.bundle 声明会自动把插件加进 bundle 栈）
-dsh plugin --profile web add dsh-subagent-codex
-# 或本地 tgz 安装
-dsh plugin --profile web add file:/path/to/dsh-subagent-codex-0.1.2.tgz
+# 推荐：按 tag 安装（版本可复现）
+dsh plugin --profile desktop add github:mjylfz/dsh-subagent-codex#v0.1.2
+
+# 或从 GitHub Release 下载 tgz 后本地安装
+dsh plugin --profile desktop add file:/path/to/dsh-subagent-codex-0.1.2.tgz
 ```
 
-### 3. 重启，开聊
+安装后需要**完全退出并重启 DSH Desktop** 才会加载。
+
+### 4. 重启，开聊
 
 重启 DSH 后新开一个会话，直接说：
 
@@ -105,6 +118,12 @@ A: 插件在你本机的 PATH 里找 `codex` 可执行文件。如果找不到�
 
 **Q: 会消耗我的 OpenAI 额度吗？**
 A: 会。每次调用都用你 `~/.codex` 登录的账号跑 Codex，消耗的是 Codex 的 token 额度。
+
+**Q: 升级 DSH 之后插件没加载了 / 日志里说 "is incompatible with dsh"？**
+A: 这是 DSH 的兼容闸门在工作——它检测到插件的 peer 声明不满足当前运行时，于是拒绝加载（而不是崩溃）。DSH Desktop 2.0.16 起内核跳到 `0.2.0`，请把插件升到 `0.1.2` 或更新；`0.1.1` 及更早只支持 `0.1.x`。
+
+**Q: 子任务超时或被取消后，整个会话卡住不动了？**
+A: `0.1.1` 及更早的已知缺陷。被信号杀死的子进程 `exitCode` 仍为 `null`，导致取消路径上的等待永远不返回。`0.1.2` 已修复（改为在 spawn 时提前建立 exit promise）。
 
 ## License
 
